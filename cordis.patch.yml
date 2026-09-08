@@ -1,0 +1,6 @@
+# dsh-park-notes: one loader row mounting the browser half.
+# Installed with `dsh plugin --profile web add dsh-park-notes` (or a git spec);
+# the row id `park-notes` owns the `conversation.input.dock` idea strip.
+- insert:
+    - id: park-notes
+      name: 'dsh-park-notes'
