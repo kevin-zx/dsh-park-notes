@@ -2,18 +2,38 @@
 
 Park thoughts while the AI is working — without interrupting the conversation.
 
-While the agent is busy writing, you often think of something worth raising
-later. Interrupting the current turn would break the flow; forgetting it would
-lose it. **Park Notes** gives you a tiny strip above the composer: jot the
-thought, forget about it, and when the current exchange is over push the
-parked items straight into your next draft (never sent automatically), then
-delete them with one click.
-
 **⚠️ Disclaimer / 免责声明**
 
 Plugins run third-party code on your machine. Review the source before
 installing — this project is a community plugin, not affiliated with
 DeepSeek. / 插件会在你的机器上执行第三方代码，安装前请自行审阅源码；本项目为社区插件，与 DeepSeek 官方无关联。
+
+---
+
+## The problem / 要解决的问题
+
+**Scenario — 你在和 AI 对话的过程中，突然想到"这个也想和 AI 聊聊"。**
+
+- AI 正在输出，你的思路被带跑了——刚想到一条新的问题/话题/补充，想立刻说；
+- 但如果**直接发送**：要么打断 AI 当前的生成（它本该一次说完那件事），要么把两件不相关的事揉进下一个回合，节奏全乱；
+- 如果**等一会儿再说**：等它生成完，你的想法往往已经忘了，或者只记得"好像有个事要说"却想不起来是什么。
+
+**一句话：在"现在说会打断"和"晚点说会忘"之间，缺一个零成本的中间态。**
+
+## What it solves / 它如何解决
+
+`稍后说` 在输入框上方放了一条**常驻便签条**：想到什么，点开随手记一条（回车即可，不打断正在进行的对话），然后继续专注当前的事。等这轮聊完、你想聊那个话题了，**一键把便签带进输入框草稿**（只填草稿、不自动发送），确认后发送即可。
+
+- **记的时候**：零打断——便签在输入框旁，3 秒完成，AI 的生成不受影响；
+- **存的时候**：随会话走——每条便签挂在当前会话下，刷新、重启都不丢；
+- **用的时候**：一键带入——不再靠记忆，草稿里就是你要聊的内容；
+- **用完即清**：带入后自动从便签列表移除，不会重复携带。
+
+While the agent is busy writing, you think of something worth raising later.
+`稍后说` gives you a tiny strip above the composer: jot the thought, forget
+about it, and when the current exchange is over push the parked items straight
+into your next draft (never sent automatically), then delete them with one
+click.
 
 ---
 
