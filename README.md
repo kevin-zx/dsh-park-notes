@@ -23,7 +23,7 @@ Requires the web profile (`dsh web`). / 需要 web 版 dsh（`dsh web`）。
 
 ```bash
 # from a git checkout / 从 Git 仓库安装
-dsh plugin --profile web add github:<your-username>/dsh-park-notes
+dsh plugin --profile web add github:kevin-zx/dsh-park-notes
 
 # or once published to npm / 或发布 npm 后：
 dsh plugin --profile web add dsh-park-notes

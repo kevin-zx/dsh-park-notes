@@ -33,7 +33,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<YOUR-USERNAME>/dsh-park-notes.git"
+    "url": "git+https://github.com/kevin-zx/dsh-park-notes.git"
   },
   "dsh": {
     "bundle": {
