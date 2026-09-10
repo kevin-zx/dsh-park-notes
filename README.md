@@ -68,13 +68,22 @@ row — not both, or the row id collides. / 二选一，不能同时用，否则
 
 - **Collapsed**: `💡 稍后说 (2)` — always visible, shows the pending count. /
   **折叠**：常驻条带，显示待聊数量。
-- **Expanded**: the parked list, then a quick-capture input. /
-  **展开**：待聊列表 + 快捷记录框。
+- **Expanded**: pending notes (pinned first), then a quick-capture input, then a
+  collapsed **history**. / **展开**：待聊列表（置顶优先）→ 快捷记录框 → 折叠的「已带入」历史。
   - `Enter` records (IME-safe, `Shift+Enter` newline), `Esc` collapses. /
     `Enter` 记录（支持中文输入法，`Shift+Enter` 换行），`Esc` 收起。
-  - **带入** appends a note to the composer draft (not sent) and removes it
-    from the list; **删除** drops it; **全部带入输入框** does both at once. /
-    「带入」= 追加到输入框草稿（不发送）并从列表移除；「删除」直接丢弃。
+  - **带入** appends a note to the composer draft (not sent) and moves it to
+    history; **删除** drops it; **全部带入输入框** does both at once. /
+    「带入」= 追加到输入框草稿（不发送）并移入历史；「删除」直接丢弃。
+  - **Edit**: click a note's text to edit in place (`Enter` saves, `Esc` cancels). /
+    **二次编辑**：点击条目文字就地编辑（`Enter` 保存、`Esc` 取消）。
+  - **Pin**: 📌 keeps a note on top of the pending list. /
+    **置顶**：📌 把条目固定在待聊列表最前。
+  - **History**: pushed notes stay under a collapsed `已带入` section, tagged
+    `已带入` / `已发送` (a note flips to `已发送` once the draft carrying it is
+    actually submitted), with 重新带入 / 删除 / 清空. / **历史**：带入过的内容收进
+    折叠的「已带入」区，标注「已带入 / 已发送」（真正把草稿发出去后自动标记），
+    支持重新带入、删除、清空。
 - Data lives in the browser `localStorage` per session (key
   `dsh-park-notes:v1:<sessionId>`); server restarts don't affect it. Notes
   written by the pre-rename `dsh-idea-note` build migrate automatically. /
