@@ -64,6 +64,39 @@ Manual alternative — in `$DSH_HOME/profiles/web/cordis.patch.yml` / 手动方�
 Use **either** the bundle install (`dsh plugin add ...`) **or** the manual
 row — not both, or the row id collides. / 二选一，不能同时用，否则行 id 冲突。
 
+## Update / 更新
+
+One command pulls the latest `main` commit; then restart `dsh web` (a
+browser-half-only change may appear after a page refresh, a host-half change —
+like the `/note` command — needs the restart). / 一条命令拉取 `main` 最新提交，
+然后重启 `dsh web`（只有浏览器半边变化时刷新页面即可；宿主半边变化——比如
+`/note` 命令——需要重启）。
+
+```bash
+dsh plugin --profile web update dsh-park-notes
+```
+
+Check what is installed / 查看当前版本：
+
+- **Settings → Plugins** in the web UI lists `dsh-park-notes` with its version. /
+  网页界面 **设置 → 插件** 里能看到 `dsh-park-notes` 的版本号。
+- `dsh web --dump-config | grep park-notes` confirms the row is mounted. /
+  该命令可确认挂载行存在。
+
+Notes / 说明：
+
+- Installed **without a ref** (`github:kevin-zx/dsh-park-notes`) keeps tracking
+  `main`, so updates just work. Installing a pinned ref
+  (`...#v0.5.0`) freezes the version — re-`add` the unpinned spec to follow
+  again. / **不加 ref** 安装才会跟随 `main` 更新；装了固定 tag（`...#v0.5.0`）
+  就冻结在那个版本，需要重新用不带 ref 的形式 add 一次。
+- If GitHub is unreachable, export a proxy first
+  (`$env:HTTPS_PROXY="http://127.0.0.1:1080"` style) or install a tarball. /
+  GitHub 不通时先设置代理环境变量，或改用 tarball 安装。
+- **Updating never touches your notes or images** — they live in the browser
+  (localStorage + IndexedDB), not in the package. / **更新不会影响便签与图片**，
+  它们存在浏览器里，不在插件包里。
+
 ## Usage / 用法
 
 - **`/note <text>`** — type it in the composer and press Enter: the text is parked
