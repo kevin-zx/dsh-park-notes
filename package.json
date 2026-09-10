@@ -1,6 +1,6 @@
 {
   "name": "dsh-park-notes",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Parked thoughts for later: jot follow-up topics while the AI is working, without interrupting the conversation, and push them into the composer draft when the time is right. DSH web plugin. 稍后说：等待 AI 时记下想聊的话题，不打断当前对话，稍后一键带入输入框。",
   "type": "module",
   "main": "./lib/index.js",
