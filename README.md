@@ -87,6 +87,18 @@ row — not both, or the row id collides. / 二选一，不能同时用，否则
     **二次编辑**：点击条目文字就地编辑（`Enter` 保存、`Esc` 取消）。
   - **Pin**: 📌 keeps a note on top of the pending list. /
     **置顶**：📌 把条目固定在待聊列表最前。
+  - **Images**: paste, drop, or `＋图片` to attach images to a note; thumbnails
+    show in the note, click one to enlarge, and the enlarged view can copy the
+    image to the clipboard or save it to a file. / **图片**：粘贴、拖入或点
+    `＋图片` 给便签附上图片；缩略图显示在条目里，点击放大；放大后可复制到剪贴板
+    或保存到本地文件。
+  - **Pushing a note that has images**: the text goes into the draft and the
+    first image is copied to the clipboard — press `Ctrl+V` in the composer to
+    attach it. (The public client API takes draft-image ids that third-party
+    plugins cannot mint, so the clipboard is the honest hand-off.) / **带入含图
+    便签**：文字进草稿，首图自动复制到剪贴板——在输入框按 `Ctrl+V` 即成附件。
+    （公开 API 只接受内部生成的草稿图片 id，第三方插件无法直接注入，剪贴板是
+    最诚实的交接方式。）
   - **Search**: filter pending and history together (substring match). /
     **搜索**：一个输入框同时过滤待聊与历史。
   - **Export**: download every note of the session as Markdown
@@ -145,10 +157,16 @@ change up via client HMR (or Ctrl+Shift+R). Syntax check: `node --check lib/clie
 
 ## Requirements / limits / 限制
 
-- Web profile only (browser UI); no host-side behavior yet. / 仅 web 界面。
-- Notes are per-session, per-browser (localStorage). Cross-browser sync would
-  need a host half with `dsh-storage` — a good next step. / 便签按会话、
-  按浏览器隔离；跨浏览器同步可做 v2（host 存储）。
+- Web profile only (browser UI). / 仅 web 界面。
+- Notes are per-session, per-browser (localStorage); images live in the browser's
+  IndexedDB under the same per-session ownership and are never uploaded. /
+  便签按会话、按浏览器隔离（localStorage）；图片存在浏览器 IndexedDB，同样按会话
+  归属，**不会上传到任何地方**。
+- Images cannot be injected into the composer as attachments by a third-party
+  plugin; the panel hands them over through the clipboard instead. / 图片无法由
+  第三方插件直接注入输入框附件；面板改用剪贴板交接。
+- The Markdown export marks how many images a note has (blobs stay in the
+  browser). / Markdown 导出会标注每条便签的图片数量（图片本体留在浏览器里）。
 - Two browser tabs editing the same session's notes: last write wins. /
   同会话双标签页编辑时以最后写入为准。
 
