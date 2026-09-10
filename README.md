@@ -66,10 +66,18 @@ row — not both, or the row id collides. / 二选一，不能同时用，否则
 
 ## Usage / 用法
 
+- **`/note <text>`** — type it in the composer and press Enter: the text is parked
+  as a pending note, the command runs directly against the agent (no model
+  message is created) and its result row confirms it. Keyboard-only and fully
+  non-interrupting. / **`/note 内容`** — 在输入框直接敲，回车即记录；命令直接
+  对 agent 执行、**不产生模型消息**，结果行给出确认。纯键盘、零打断。
+- **`Alt+N`** — reveal and focus the capture box without touching the mouse. /
+  **`Alt+N`** — 打开并聚焦记录框，不用鼠标。
 - **Collapsed**: `💡 稍后说 (2)` — always visible, shows the pending count. /
   **折叠**：常驻条带，显示待聊数量。
-- **Expanded**: pending notes (pinned first), then a quick-capture input, then a
-  collapsed **history**. / **展开**：待聊列表（置顶优先）→ 快捷记录框 → 折叠的「已带入」历史。
+- **Expanded**: pending notes (pinned first), an optional search box, the
+  quick-capture input, then a collapsed **history**. / **展开**：待聊列表
+  （置顶优先）→ 搜索框（便签 ≥ 3 条时出现）→ 快捷记录框 → 折叠的「已带入」历史。
   - `Enter` records (IME-safe, `Shift+Enter` newline), `Esc` collapses. /
     `Enter` 记录（支持中文输入法，`Shift+Enter` 换行），`Esc` 收起。
   - **带入** appends a note to the composer draft (not sent) and moves it to
@@ -79,6 +87,10 @@ row — not both, or the row id collides. / 二选一，不能同时用，否则
     **二次编辑**：点击条目文字就地编辑（`Enter` 保存、`Esc` 取消）。
   - **Pin**: 📌 keeps a note on top of the pending list. /
     **置顶**：📌 把条目固定在待聊列表最前。
+  - **Search**: filter pending and history together (substring match). /
+    **搜索**：一个输入框同时过滤待聊与历史。
+  - **Export**: download every note of the session as Markdown
+    (`park-notes-YYYY-MM-DD.md`). / **导出**：把本会话全部便签导出为 Markdown 文件。
   - **History**: pushed notes stay under a collapsed `已带入` section, tagged
     `已带入` / `已发送` (a note flips to `已发送` once the draft carrying it is
     actually submitted), with 重新带入 / 删除 / 清空. / **历史**：带入过的内容收进
