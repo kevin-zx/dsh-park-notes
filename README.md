@@ -107,17 +107,35 @@ row — not both, or the row id collides. / 二选一，不能同时用，否则
 A DSH web plugin = one package with a host half and a browser half. /
 DSH 网页插件 = 一个包，含 host 半边和浏览器半边。
 
-- `lib/index.js` — host half: empty apply, exists so the Loader row mounts.
+- `lib/index.js` — host half: registers the `/note` slash command through the
+  host `commands` service; the command runs directly against the agent and never
+  creates a model message.
 - `lib/client.js` — browser half: a `window.__ModuleLoader__.load(...)`
   bundle (same hand-written format as shipped `dsh-client-ui-*` packages, no
   build step). It declares `inject: ["slots", "locale"]` — the `inject`
   export is the Cordis dependency declaration; without it `apply` runs before
   the `slots` service exists and fails silently.
+- The browser half also projects the host command run: a state-only
+  conversation definition matches `command/run` with `name === "note"` and parks
+  the text, deduplicated by command id so a replayed history cannot duplicate a
+  note.
 - `package.json` → `dsh.client` is how client-modules discovers and serves
   the bundle over `/plugins`; `dsh.bundle.patch` is what `dsh plugin add`
   uses to mount the row automatically.
 - UI registers in `conversation.input.dock` (order 15), the same slot family
   as Todo / Goal / queue docks.
+
+### Two traps worth knowing / 两个值得注意的坑
+
+1. **Wait for services with `ctx.inject([name], cb)`, not `ctx.get(name)`.**
+   A service provided by a later row (the command registry, the conversation
+   UI) may not exist yet when `apply` runs; a plain `ctx.get` guard then returns
+   silently and the contribution never happens. `ctx.inject` suspends the fiber
+   until the service is available.
+2. **A client bundle must export `inject`.** Without that dependency
+   declaration the browser half applies before the `slots` service exists and
+   disappears without an error — the classic "works after hot reload, gone after
+   a refresh" symptom.
 
 ## Develop / edit / 开发
 
