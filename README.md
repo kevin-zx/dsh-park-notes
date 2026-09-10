@@ -93,12 +93,15 @@ row — not both, or the row id collides. / 二选一，不能同时用，否则
     `＋图片` 给便签附上图片；缩略图显示在条目里，点击放大；放大后可复制到剪贴板
     或保存到本地文件。
   - **Pushing a note that has images**: the text goes into the draft and the
-    first image is copied to the clipboard — press `Ctrl+V` in the composer to
-    attach it. (The public client API takes draft-image ids that third-party
-    plugins cannot mint, so the clipboard is the honest hand-off.) / **带入含图
-    便签**：文字进草稿，首图自动复制到剪贴板——在输入框按 `Ctrl+V` 即成附件。
-    （公开 API 只接受内部生成的草稿图片 id，第三方插件无法直接注入，剪贴板是
-    最诚实的交接方式。）
+    first image is copied to the clipboard (re-encoded to PNG, because the async
+    clipboard only accepts PNG) — press `Ctrl+V` in the composer to attach it.
+    **Or drag a thumbnail straight into the composer**, which attaches it
+    directly. (The public client API takes draft-image ids that third-party
+    plugins cannot mint, so these two hand-offs are the honest options.) /
+    **带入含图便签**：文字进草稿，首图自动复制到剪贴板（会转成 PNG，因为异步
+    剪贴板只接受 PNG）——在输入框按 `Ctrl+V` 即成附件；**也可以把缩略图直接拖
+    进输入框**，会直接变成附件。（公开 API 只接受内部生成的草稿图片 id，第三方
+    插件无法注入，所以采用这两种交接方式。）
   - **Search**: filter pending and history together (substring match). /
     **搜索**：一个输入框同时过滤待聊与历史。
   - **Export**: download every note of the session as Markdown
