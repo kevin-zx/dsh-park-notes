@@ -168,6 +168,15 @@ change up via client HMR (or Ctrl+Shift+R). Syntax check: `node --check lib/clie
 - Images cannot be injected into the composer as attachments by a third-party
   plugin; the panel hands them over through the clipboard instead. / 图片无法由
   第三方插件直接注入输入框附件；面板改用剪贴板交接。
+- **Image storage is managed, not left to grow**: the panel shows how much is
+  stored and offers 清理历史图片; on every session load orphan images (no note
+  references them) are deleted, and once the store passes an 80 MB budget the
+  oldest images held only by archived notes are trimmed (text is kept). A single
+  image above 12 MB is downscaled to 2560 px before it is stored. Pending notes
+  are never trimmed. / **图片存储是被管理的**：面板显示占用并可一键「清理历史
+  图片」；每次进入会话会删除孤儿图片（没有任何便签引用），总量超过 80MB 时自动
+  清理最旧的归档图片（文字保留）；单张超过 12MB 会先缩到 2560px 再存。**待聊
+  便签的图片永不自动清理。**
 - The Markdown export marks how many images a note has (blobs stay in the
   browser). / Markdown 导出会标注每条便签的图片数量（图片本体留在浏览器里）。
 - Two browser tabs editing the same session's notes: last write wins. /
