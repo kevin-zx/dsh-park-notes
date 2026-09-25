@@ -66,15 +66,21 @@ row — not both, or the row id collides. / 二选一，不能同时用，否则
 
 ## Update / 更新
 
-One command pulls the latest `main` commit; then restart `dsh web` (a
-browser-half-only change may appear after a page refresh, a host-half change —
-like the `/note` command — needs the restart). / 一条命令拉取 `main` 最新提交，
-然后重启 `dsh web`（只有浏览器半边变化时刷新页面即可；宿主半边变化——比如
-`/note` 命令——需要重启）。
+One command pulls the latest `main` commit — **then restart `dsh web`**. / 一条
+命令拉取 `main` 最新提交，**然后重启 `dsh web`**。
 
 ```bash
 dsh plugin --profile web update dsh-park-notes
+# then: Ctrl+C in the dsh web terminal, and start it again
 ```
+
+**Restarting is required, not optional.** A page refresh is not enough: the
+running host keeps the browser bundles it read at startup, and after a `pnpm`
+re-install the bundle lives at a new store path, so the client-HMR file watcher
+(which still watches the previous path) never notices the change. Restarting
+re-reads both halves. / **必须重启，刷新页面不够**：运行中的进程持有启动时读取的
+浏览器 bundle 快照，而 `pnpm` 重新安装后 bundle 位于新的存储路径，客户端 HMR
+的文件监视仍指向旧路径，因此永远发现不了变化；重启会重新读取两半边。
 
 Check what is installed / 查看当前版本：
 
