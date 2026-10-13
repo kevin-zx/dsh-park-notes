@@ -192,6 +192,34 @@ DSH 网页插件 = 一个包，含 host 半边和浏览器半边。
    disappears without an error — the classic "works after hot reload, gone after
    a refresh" symptom.
 
+## Compatibility / 兼容性
+
+Verified against the Harness plugin contracts as of **dsh 0.2.1-alpha.2** (and
+running on a 0.1.7 profile). The surface this plugin depends on is deliberately
+small, and every piece of it is still current: / 已对照 **dsh 0.2.1-alpha.2** 的
+插件契约核验（当前运行在 0.1.7 profile 上）。本插件依赖的接口刻意保持很小，
+且每一项在新版仍然有效：
+
+| Used here / 使用的接口 | Status in 0.2.x |
+|---|---|
+| `dsh.bundle.patch` manifest + inserted row / 清单与插入行 | unchanged / 未变 |
+| Host `export function apply(ctx)` + `export const inject` | unchanged / 未变 |
+| `ctx.commands.register({ name, description, input: { hint }, handler })` | unchanged (new fields `definitionId`, `recordInput`, `input.attachments` are optional) / 未变（新增字段均为可选）|
+| Client `window.__ModuleLoader__.load({ id, factory })` + `exports["./client"]` | unchanged / 未变 |
+| Module-level `inject: ["slots", "locale", "uiConversation"]` (service names) | unchanged — official plugins declare the same way / 未变，官方插件同样用法 |
+| Slot `conversation.input.dock` | still rendered, and the official Goal plugin registers there too / 仍在，官方 Goal 插件也用 |
+| Standard props `useInput`, `inputActions`, `sessionId`, `t` | unchanged / 未变 |
+| `ctx.uiConversation.events.register(definition)` (`command/run` records) | unchanged / 未变 |
+| Display metadata `locale/*.json` `meta.title`/`meta.description` + `./icon` | required by the new Plugin Manager/Settings inventory — provided since v0.6.0 / 新版清单要求，v0.6.0 起已提供 |
+
+Known soft spot / 已知薄弱点: the automatic image hand-off dispatches a synthetic
+`paste` into the composer's editor. That is not an official extension point (the
+docs advise against cross-plugin DOM coupling), so a future composer rewrite can
+disable it — the clipboard and drag routes remain as fallbacks. / 图片"自动进
+附件"是向编辑区派发合成粘贴事件，属于非官方扩展点，未来输入框改版可能失效；
+剪贴板与拖拽两条兜底通道不受影响。
+
+
 ## Develop / edit / 开发
 
 `lib/client.js` is plain JavaScript — edit it; a running dsh web picks the
